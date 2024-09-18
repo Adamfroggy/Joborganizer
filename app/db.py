@@ -1,6 +1,7 @@
 import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
+import sqlite3
 
 # Load environment variables from .env file
 load_dotenv()
@@ -18,6 +19,34 @@ client = MongoClient
 # Access the database and collection
 db = client[db_name]
 collection = db['JobTrack']
+
+
+def create_tables():
+    connection = sqlite3.connect('emails.db')
+    cursor = connection.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Emails (
+            id INTEGER PRIMARY KEY,
+            recipient TEXT,
+            subject TEXT,
+            body TEXT,
+            date_sent TEXT
+        )
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS JobApplications (
+            id INTEGER PRIMARY KEY,
+            company TEXT,
+            position TEXT,
+            status TEXT,
+            applied_date TEXT
+        )
+    ''')
+    connection.commit()
+    connection.close()
+
+
+
 
 if __name__ == '__main__':
     print("Connected to the database:", db_name)
