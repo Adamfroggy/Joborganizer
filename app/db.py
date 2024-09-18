@@ -46,6 +46,15 @@ def create_tables():
     connection.close()
 
 
+def save_email_to_db(email):
+    connection = sqlite3.connect('emails.db')
+    cursor = connection.cursor()
+    cursor.execute('''
+        INSERT INTO Emails (recipient, subject, body, date_sent)
+        VALUES (?, ?, ?, ?)
+    ''', (email.recipient, email.subject, email.body, email.date_sent))
+    connection.commit()
+    connection.close()
 
 
 if __name__ == '__main__':
