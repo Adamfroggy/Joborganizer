@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Job Application Tracker</h1>
+    </header>
+
+    <section>
+        <h2>Track your job applications</h2>
+        <form action="/add_job" method="POST">
+            <label for="company">Company:</label>
+            <input type="text" id="company" name="company" required>
+
+            <label for="position">Position:</label>
+            <input type="text" id="position" name="position" required>
+
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status" required>
+
+            <button type="submit">Add Job</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Job Tracker</p>
+    </footer>
+</body>
+</html>
